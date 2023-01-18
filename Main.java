@@ -20,6 +20,7 @@ public class Main {
     static ArrayList<Batch> batches = new ArrayList<Batch>();
     static ArrayList<Course> courses = new ArrayList<Course>();
 
+
     public static void createNewBatch(){
         Batch batch = new Batch();
         batches.add(batch);
@@ -129,9 +130,25 @@ public class Main {
 
         students.stream().filter(st -> (st.getName().equals(name))).forEachOrdered(st -> {
             st.makePayment(month, st.feeType);
+            System.out.println(st.feeType);
             System.out.println(String.format("Payment Succesfull for %s by %s", month,st.name));
         });
         mainMenu();
+    }
+    public static void monthlyPaymentReport(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Month :");
+        String month = scanner.nextLine();
+
+        int  totalAmount = 0;
+
+        for (Student st : students){
+            st.payments.stream().filter(py -> (py.getMonth().equals(month))).forEachOrdered(py -> {
+                System.out.println(py.amount);
+            });
+        }
+
+        
     }
 
     public static void mainMenu(){
@@ -146,6 +163,8 @@ public class Main {
         System.out.println("\t|Press 5 STUDENT PROGRESS               |");
         System.out.println("\t|Press 6 MARK ATTENDANCE                |");
         System.out.println("\t|Press 7 MAKE PAYMENT                   |");
+        System.out.println("\t|Press 8 VIEW MONTHLY PAYMENT REPORT    |");
+        System.out.println("\t|Press 9 VIEW FULL PAYMENT REPORT       |");
         System.out.println("\t|Press 6 EXIT                           |");
 
 
@@ -168,6 +187,8 @@ public class Main {
                 markAttendance();
             case 7:
                 makePayment();
+            case 8:
+                monthlyPaymentReport();
             default:
 
                 System.out.println("\t\t  PLEASE SELECT ONLY A GIVEN OPTION   "

@@ -48,12 +48,16 @@ public class Student {
     }
 
     public void makePayment(String month,String paymentType){
-        int amount;
+        int amount = 0;
+        System.out.println(paymentType);
         if (paymentType == "Full"){
+            System.out.println(amount);
             amount = 1000;
-        }else{
+            System.out.println(amount);
+        }else if(paymentType == "Half"){
             amount = 500;
-        }
+        };
+        System.out.println(amount);
         payments.add(new Payment(month, amount));
     }
     @SuppressWarnings("unchecked")
