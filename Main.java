@@ -120,6 +120,20 @@ public class Main {
         mainMenu();
     }
 
+    public static void makePayment(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Student Name :");
+        String name = scanner.nextLine();
+        System.out.println("Enter Payment Month :");
+        String month = scanner.nextLine();
+
+        students.stream().filter(st -> (st.getName().equals(name))).forEachOrdered(st -> {
+            st.makePayment(month, st.feeType);
+            System.out.println(String.format("Payment Succesfull for %s by %s", month,st.name));
+        });
+        mainMenu();
+    }
+
     public static void mainMenu(){
         System.out.println("____________________________________________________________________________");
         System.out.println("\t\t               WELCOME TO TUITION CLASS MANAGEMENT SYSTEM");
@@ -131,6 +145,7 @@ public class Main {
         System.out.println("\t|Press 4 SUBMIT ASSIGNMENT              |");
         System.out.println("\t|Press 5 STUDENT PROGRESS               |");
         System.out.println("\t|Press 6 MARK ATTENDANCE                |");
+        System.out.println("\t|Press 7 MAKE PAYMENT                   |");
         System.out.println("\t|Press 6 EXIT                           |");
 
 
@@ -151,6 +166,8 @@ public class Main {
                 getStudentProgress();
             case 6:
                 markAttendance();
+            case 7:
+                makePayment();
             default:
 
                 System.out.println("\t\t  PLEASE SELECT ONLY A GIVEN OPTION   "

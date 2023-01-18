@@ -11,9 +11,10 @@ public class Student {
     private String teleNo;
     private String school;
     private String dateOfRegister;
-    private String feeType;
+    public String feeType;
     public ArrayList<Assignment> assignments;
     public ArrayList<Attendance> attendances;
+    public ArrayList<Payment> payments;
 
     public Student(String name, String address, String teleNo ,String school, String dateOfRegister,String feeType){
         this.name = name;
@@ -24,6 +25,7 @@ public class Student {
         this.feeType = feeType;
         this.assignments = new ArrayList<Assignment>();
         this.attendances = new ArrayList<Attendance>();
+        this.payments = new ArrayList<Payment>();
     }
 
     public void submitAssignment(int assignmentId, int marks){
@@ -43,6 +45,16 @@ public class Student {
             attendaStringFinal = "Absent";
         }
         attendances.add(new Attendance(dateFormat.format(date), attendaStringFinal));
+    }
+
+    public void makePayment(String month,String paymentType){
+        int amount;
+        if (paymentType == "Full"){
+            amount = 1000;
+        }else{
+            amount = 500;
+        }
+        payments.add(new Payment(month, amount));
     }
     @SuppressWarnings("unchecked")
     public ArrayList checkStudentProgress(){
